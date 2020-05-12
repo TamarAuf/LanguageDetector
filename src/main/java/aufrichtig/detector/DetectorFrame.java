@@ -10,7 +10,7 @@ public class DetectorFrame extends JFrame {
 
     JLabel instr;
     JTextField text;
-    protected String textEntry;
+    String textEntry;
     JTextArea results;
     JButton detectLanguage;
     JPanel topPanel;
@@ -22,24 +22,30 @@ public class DetectorFrame extends JFrame {
         setTitle("Language Detector");
         setLayout(new BorderLayout());
 
+
+        instr = new JLabel("Enter text of any language in English characters");
+        text = new JTextField();
+        text.setPreferredSize(new Dimension(160, 200));
+        textEntry = text.getText();
+        results = new JTextArea();
+        results.setPreferredSize(new Dimension(200, 200));
+        detectLanguage = new JButton("Detect Language");
+        topPanel = new JPanel();
+        bottomPanel = new JPanel();
+
+        topPanel.add(instr);
+        topPanel.add(text);
+        bottomPanel.add(detectLanguage);
+        bottomPanel.add(results);
+
+        add(topPanel, BorderLayout.NORTH);
+        add(bottomPanel, BorderLayout.SOUTH);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://ws.detectlanguage.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         DetectorService service = retrofit.create(DetectorService.class);
-
-        instr = new JLabel("Enter text of any language in English characters");
-        text = new JTextField();
-        textEntry = text.getText();
-        results = new JTextArea();
-        detectLanguage = new JButton("Detect Language");
-
-        add(topPanel);
-        add(bottomPanel);
-        topPanel.add(instr);
-        topPanel.add(text);
-        bottomPanel.add(results);
-        bottomPanel.add(detectLanguage);
 
         detectLanguage.addActionListener(actionEvent -> {
             DetectorController controller = new DetectorController(service);
