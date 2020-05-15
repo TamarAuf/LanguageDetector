@@ -11,13 +11,16 @@ public class DetectorFrame extends JFrame {
     JLabel instr;
     JTextField text;
     String textEntry;
-    JTextArea results;
+    JLabel language;
+    JLabel reliability;
+    JLabel confidence;
     JButton detectLanguage;
     JPanel topPanel;
+    JPanel midPanel;
     JPanel bottomPanel;
 
     public DetectorFrame() {
-        setSize(600, 600);
+        setSize(600, 350);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Language Detector");
         setLayout(new BorderLayout());
@@ -27,18 +30,23 @@ public class DetectorFrame extends JFrame {
         text = new JTextField();
         text.setPreferredSize(new Dimension(160, 200));
         textEntry = text.getText();
-        results = new JTextArea();
-        results.setPreferredSize(new Dimension(200, 200));
+        language = new JLabel();
+        reliability = new JLabel();
+        confidence = new JLabel();
         detectLanguage = new JButton("Detect Language");
         topPanel = new JPanel();
+        midPanel = new JPanel();
         bottomPanel = new JPanel();
 
         topPanel.add(instr);
-        topPanel.add(text);
+        midPanel.add(text);
         bottomPanel.add(detectLanguage);
-        bottomPanel.add(results);
+        bottomPanel.add(language);
+        bottomPanel.add(reliability);
+        bottomPanel.add(confidence);
 
         add(topPanel, BorderLayout.NORTH);
+        add(midPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -47,9 +55,10 @@ public class DetectorFrame extends JFrame {
                 .build();
         DetectorService service = retrofit.create(DetectorService.class);
 
+        DetectorController controller = new DetectorController(service);
+
         detectLanguage.addActionListener(actionEvent -> {
-            DetectorController controller = new DetectorController(service);
-            controller.requestData(textEntry);
+            controller.requestData(textEntry, language, reliability, confidence);
         });
 
     }

@@ -1,13 +1,12 @@
 package aufrichtig.detector;
 
-import aufrichtig.detector.DetectorFeed.Language;
+import aufrichtig.detector.DetectorFeed.Result;
 import aufrichtig.detector.DetectorFeed.Data;
 import org.junit.Test;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import javax.xml.transform.Result;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -26,18 +25,18 @@ public class DetectorTest {
         DetectorService service = retrofit.create(DetectorService.class);
 
         // when
-        DetectorFeed feed = service.getLanguage("jump").execute().body();
+        DetectorFeed feed = service.getLanguage("I like pickles").execute().body();
 
         // then
         assertNotNull(feed);
 
-        Language result = feed.data.detections.get(0);
+        Result result = feed.data.detections.get(0);
 
         assertNotNull(result);
-        /*
+/*
         System.out.println("Language: " + result.language);
         System.out.println("Is reliable: " + result.isReliable);
         System.out.println("Confidence: " + result.confidence);
-        */
+*/
     }
 }

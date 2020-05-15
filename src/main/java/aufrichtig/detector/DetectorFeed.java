@@ -5,12 +5,13 @@ import java.util.List;
 public class DetectorFeed {
 
     Data data;
+    Result result;
 
     class Data {
-        List<Language> detections;
+        List<Result> detections;
     }
 
-    class Language {
+    class Result {
         String language;
         Boolean isReliable;
         double confidence;
