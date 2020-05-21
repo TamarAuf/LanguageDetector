@@ -25,7 +25,7 @@ public class DetectorTest {
         DetectorService service = retrofit.create(DetectorService.class);
 
         // when
-        DetectorFeed feed = service.getLanguage("I like pickles").execute().body();
+        DetectorFeed feed = service.getLanguage("Hakutakuwa na ndizi leo").execute().body();
 
         // then
         assertNotNull(feed);
@@ -33,10 +33,10 @@ public class DetectorTest {
         Result result = feed.data.detections.get(0);
 
         assertNotNull(result);
-/*
+
         System.out.println("Language: " + result.language);
         System.out.println("Is reliable: " + result.isReliable);
         System.out.println("Confidence: " + result.confidence);
-*/
+
     }
 }

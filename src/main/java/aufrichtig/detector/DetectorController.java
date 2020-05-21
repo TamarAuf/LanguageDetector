@@ -18,11 +18,11 @@ public class DetectorController {
             service.getLanguage(textEntry).enqueue(new Callback<DetectorFeed>() {
                 @Override
                 public void onResponse(Call<DetectorFeed> call, Response<DetectorFeed> response) {
-                    if (response.body() != null) {
-                        //DetectorFeed.Result result = response.body().data.detections.get(0);
-                        language.setText("Language: ");// + result.language);
-                        reliability.setText("Is Reliable: ");// + result.isReliable);
-                        confidence.setText("Confidence Score: ");// + result.confidence);
+                    if (textEntry != "") {
+                        DetectorFeed.Result result = response.body().data.detections.get(0);
+                        language.setText("Language: " + result.language);
+                        reliability.setText("Is Reliable: " + result.isReliable);
+                        confidence.setText("Confidence Score: " + result.confidence);
                     }
                     else language.setText("You have not entered text.");
 

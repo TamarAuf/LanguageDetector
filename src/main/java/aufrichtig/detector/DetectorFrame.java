@@ -58,7 +58,13 @@ public class DetectorFrame extends JFrame {
         DetectorController controller = new DetectorController(service);
 
         detectLanguage.addActionListener(actionEvent -> {
-            controller.requestData(textEntry, language, reliability, confidence);
+            textEntry = text.getText();
+            if(textEntry != ""){
+                controller.requestData(textEntry, language, reliability, confidence);
+            }
+            else{
+                language.setText("Invalid entry. Try again");
+            }
         });
 
     }
