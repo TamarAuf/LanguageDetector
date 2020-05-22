@@ -19,6 +19,8 @@ public class DetectorFrame extends JFrame {
     JPanel midPanel;
     JPanel bottomPanel;
 
+    boolean check = false;
+
     public DetectorFrame() {
         setSize(600, 350);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -26,7 +28,7 @@ public class DetectorFrame extends JFrame {
         setLayout(new BorderLayout());
 
 
-        instr = new JLabel("Enter text of any language in English characters");
+        instr = new JLabel("Enter text of any language");
         text = new JTextField();
         text.setPreferredSize(new Dimension(160, 200));
         textEntry = text.getText();
@@ -58,14 +60,35 @@ public class DetectorFrame extends JFrame {
         DetectorController controller = new DetectorController(service);
 
         detectLanguage.addActionListener(actionEvent -> {
+            language.setText("");
+            reliability.setText("");
+            confidence.setText("");
             textEntry = text.getText();
-            if(textEntry != ""){
+            checkWord(textEntry);
+            if (check) {
                 controller.requestData(textEntry, language, reliability, confidence);
-            }
-            else{
-                language.setText("Invalid entry. Try again");
+            } else {
+                language.setText("Invalid entry. Try again.");
             }
         });
+    }
+
+    private void checkWord(String textEntry) {
+
+        if (textEntry == null || textEntry.equals("")) {
+            check = false;
+        } else {
+            check = true;
+            int len = textEntry.length();
+            for (int i = 0; i < len; i++) {
+                if (Character.isLetter(textEntry.charAt(i))) {
+                    check = true;
+                    break;
+                } else {
+                    check = false;
+                }
+            }
+        }
 
     }
 

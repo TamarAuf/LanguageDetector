@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="aufrichtig.detector.DetectorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-21T22:41:10" hostname="DESKTOP-FG7N4PF" time="8.753">
+<testsuite name="aufrichtig.detector.DetectorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-22T02:26:57" hostname="DESKTOP-FG7N4PF" time="2.995">
   <properties/>
-  <testcase name="detectLanguage" classname="aufrichtig.detector.DetectorTest" time="8.753"/>
-  <system-out><![CDATA[Language: sw
-Is reliable: true
-Confidence: 12.8
-]]></system-out>
+  <testcase name="detectLanguage" classname="aufrichtig.detector.DetectorTest" time="2.995"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
